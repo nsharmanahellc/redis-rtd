@@ -10,13 +10,14 @@ using System.Windows.Threading;
 using StackExchange.Redis;
 using NLog;
 
+
 namespace RedisRtd
 {
     [
         Guid("0FD27211-C7C4-49D8-B6D9-0BF953DC88B0"),
         // This is the string that names RTD server.
         // Users will use it from Excel: =RTD("redis",, ....)
-        ProgId("redis")
+        ProgId("redis"),
     ]
     public class RedisRtdServer : IRtdServer
     {

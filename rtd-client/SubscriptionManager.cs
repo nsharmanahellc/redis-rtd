@@ -34,6 +34,10 @@ namespace RedisRtd
 
         public bool Subscribe(int topicId, string host, string channel, string field=null)
         {
+            if (host == null)
+            {
+                host = "localhost";
+            }
             var topicPath = FormatPath(host, channel, field);
             var alreadySubscribed = false;
             var redisPath = FormatPath(host, channel);

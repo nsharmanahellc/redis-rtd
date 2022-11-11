@@ -49,11 +49,22 @@ namespace TestApp
             ConfigurationOptions options = new ConfigurationOptions
             {
                 AbortOnConnectFail = true,
-                EndPoints = { "localhost" }
+                EndPoints =    {
+                    { "192.168.0.59", 6379},
+                },
             };
+            //telnet 127.0.0.1 16379
+            //ssh -R 16379:127.0.0.1:6379 nsharma@10.0.0.120
+            //dism /online /Enable-Feature /FeatureName:TelnetClient
+            //%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client\bin\Debug\RedisRtd.dll /codebase
+            //%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client\bin\Debug\RedisRtd.dll /codebase /u
+            //C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client>gacutil -u RedisRtd
+            //C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client>gacutil -u RedisRtd
+            //C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client>gacutil -i C:\Users\navni\source\repos\nsharmanahellc\nme-rtd\rtd-client\bin\Debug\RedisRtd.dll
             ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(options);
 
             sub = redis.GetSubscriber();
+            Subscribing(channel, field);
 
             int r = 200;
             var padding = new String('x', r);
@@ -83,7 +94,7 @@ namespace TestApp
 
         }
 
-        void Sub(string channel, string field)
+        void Subscribing(string channel, string field)
         {
             Console.WriteLine($"Subscribing: topic={_topic}, exchange={channel}, field={field}");
 
